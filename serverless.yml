@@ -1,0 +1,21 @@
+org: tbobs
+app: tbot
+service: my-telegram-bot
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: python3.9
+  timeout: 30
+  environment:
+    TELEGRAM_TOKEN: ${env:TELEGRAM_TOKEN}
+    OPENAI_TOKEN: ${env:OPENAI_TOKEN}
+
+functions:
+  post:
+    handler: handler.hello
+    events:
+      - http:
+          path: my-custom-url
+          method: post
+          cors: true
